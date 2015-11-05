@@ -54,6 +54,9 @@
 void operatorControl() {
 
 	while (1) {
+		int up = joystickGetDigital(1, 8, JOY_UP);
+		int down = joystickGetDigital(1, 8, JOY_DOWN);
+
 		delay(20);
 	}
 }

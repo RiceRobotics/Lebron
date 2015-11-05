@@ -55,7 +55,13 @@ extern "C" {
 // actual code. If a function does not match a prototype, compile errors will occur.
 
 // Prototypes for initialization, operator control and autonomous
-
+Ricebutton *top;
+Ricebutton* bottom;
+Ricemotor* shooter1;
+Ricemotor* shooter2;
+Ricemotor* shooter3;
+Ricemotor* liftleft;
+Ricemotor* liftright;
 /**
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the
