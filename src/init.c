@@ -64,6 +64,10 @@ void initialize() {
 	shooter1 = initRicemotor(3,1);//insert port number and then -1 if reversed, 1 if not
 	shooter2 = initRocemotor(3,1);
 	shooter3 = initRicemotor(3,1);
-	liftleft = initRicemotor(2,1);//same thing
-	liftright = initRicemotor(2,1);
+	liftleft1b = initRicemotor(2,1);//same thing //bottom motor on left when looking from the front(where ball is)
+	liftleft2m = initRicemotor(2,1);//middle motor on the left when looking from the front
+	liftleft3t = initRicemotor(2,1);//top motor on the left of lift
+	liftright1b = initRicemotor(2,1);//bottom right motor on lift
+	liftright2m = initRicemotor(2,1);//middle motor on right
+	liftright3t = initRicemotor(2,1);//top motor on right for lift
 }

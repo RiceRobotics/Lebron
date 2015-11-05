@@ -56,6 +56,23 @@ void operatorControl() {
 	while (1) {
 		int up = joystickGetDigital(1, 8, JOY_UP);
 		int down = joystickGetDigital(1, 8, JOY_DOWN);
+		int liftpower = joystickGetAnalog(1, 2);
+		if(liftpower!=0) {
+			liftleft1b->out = liftpower;
+			liftleft2m->out = liftpower;
+			liftleft3t->out = liftpower;
+			liftright1b->out = liftpower;
+			liftright2m->out = liftpower;
+			liftright3t->out = liftpower;
+		}
+		else{
+			liftleft1b->out = liftpower;
+			liftleft2m->out = liftpower;
+			liftleft3t->out = liftpower;
+			liftright1b->out = liftpower;
+			liftright2m->out = liftpower;
+			liftright3t->out = liftpower;
+		}
 
 		delay(20);
 	}

@@ -60,8 +60,12 @@ Ricebutton* bottom;
 Ricemotor* shooter1;
 Ricemotor* shooter2;
 Ricemotor* shooter3;
-Ricemotor* liftleft;
-Ricemotor* liftright;
+Ricemotor* liftleft1b;
+Ricemotor* liftleft2m;
+Ricemotor* liftleft3t;
+Ricemotor* liftright1b;
+Ricemotor* liftright2m;
+Ricemotor* liftright3t;
 /**
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the
