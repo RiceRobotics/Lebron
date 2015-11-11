@@ -49,4 +49,27 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 void autonomous() {
+	//creates method called lift with following code
+	int liftpower = 150;
+	while (top->state != 0) {
+		liftleft1b->out = liftpower;
+		liftleft2m->out = liftpower;
+		liftleft3t->out = liftpower;
+		liftright1b->out = liftpower;
+		liftright2m->out = liftpower;
+		liftright3t->out = liftpower;
+	}
+	delay(20);
+	//insert code to shoot here!
+	while (bottom->state != 0) {
+		liftleft1b->out = -liftpower;
+		liftleft2m->out = -liftpower;
+		liftleft3t->out = -liftpower;
+		liftright1b->out = -liftpower;
+		liftright2m->out = -liftpower;
+		liftright3t->out = -liftpower;
+	}
+	//this should be the end of the lift method
+	delay(2000);
+	//insert delays and calls to lift for entire period
 }
