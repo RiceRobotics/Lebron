@@ -64,6 +64,7 @@ void operatorControl() {
 		lifttop->out = liftpower;
 		liftrightm->out = liftpower;
 		int shootPower = -127;
+
 		if (conv) {
 			conveyer->out = 70;
 		} else if (revconv) {
@@ -85,6 +86,13 @@ void operatorControl() {
 			shooter3->out = 0;
 		}
 
+		printf("%d\n\r", top->state);
+		if(!top->state && liftpower > 0) {
+			liftbottom->out = 0;
+			liftleftm->out = 0;
+			lifttop->out = 0;
+			liftrightm->out = 0;
+		}
 		delay(20);
 	}
 }
