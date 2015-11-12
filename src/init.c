@@ -60,9 +60,8 @@ void initializeIO() {
  */
 void initialize() {
 	top = initRicebutton(4);//insert proper port number here
-	bottom = initRicebutton(7);//insert proper port umber here
 	shooter1 = initRicemotor(3,1);//insert port number and then -1 if reversed, 1 if not
-	shooter2 = initRocemotor(3,1);
+	shooter2 = initRicemotor(3,1);
 	shooter3 = initRicemotor(3,1);
 	liftleft1b = initRicemotor(2,1);//same thing //bottom motor on left when looking from the front(where ball is)
 	liftleft2m = initRicemotor(2,1);//middle motor on the left when looking from the front

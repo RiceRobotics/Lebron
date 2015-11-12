@@ -56,7 +56,6 @@ extern "C" {
 
 // Prototypes for initialization, operator control and autonomous
 Ricebutton *top;
-Ricebutton* bottom;
 Ricemotor* shooter1;
 Ricemotor* shooter2;
 Ricemotor* shooter3;
@@ -80,6 +79,8 @@ Ricemotor* liftright3t;
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
+
+
 void autonomous();
 /**
  * Runs pre-initialization code. This function will be started in kernel mode one time while the
@@ -122,6 +123,10 @@ void initialize();
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
 void operatorControl();
+
+void shoot();
+
+void lift();
 
 // End C++ export structure
 #ifdef __cplusplus

@@ -48,9 +48,36 @@
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
+//void shoot();
+
 void autonomous() {
-	//creates method called lift with following code
-	int liftpower = 150;
+	shoot();
+	shoot();
+	shoot();
+	delay(60000);
+	lift();
+
+
+	//insert delays and calls to lift for entire period
+}
+
+void shoot() {
+	int shootPower = 127;
+
+	shooter1->out = shootPower;
+	shooter2->out = shootPower;
+	shooter3->out = shootPower;
+
+	delay(10000);
+
+	shooter1->out = 0;
+	shooter2->out = 0;
+	shooter3->out = 0;
+}
+
+void lift() {
+	int liftpower = 100;
+	int count = 0;
 	while (top->state != 0) {
 		liftleft1b->out = liftpower;
 		liftleft2m->out = liftpower;
@@ -58,18 +85,17 @@ void autonomous() {
 		liftright1b->out = liftpower;
 		liftright2m->out = liftpower;
 		liftright3t->out = liftpower;
+		count++;
 	}
-	delay(20);
-	//insert code to shoot here!
-	while (bottom->state != 0) {
-		liftleft1b->out = -liftpower;
-		liftleft2m->out = -liftpower;
-		liftleft3t->out = -liftpower;
-		liftright1b->out = -liftpower;
-		liftright2m->out = -liftpower;
-		liftright3t->out = -liftpower;
-	}
-	//this should be the end of the lift method
-	delay(2000);
-	//insert delays and calls to lift for entire period
+	shoot();
+	for (int x = 0; x < count; x++) {
+			liftleft1b->out = -liftpower;
+			liftleft2m->out = -liftpower;
+			liftleft3t->out = -liftpower;
+			liftright1b->out = -liftpower;
+			liftright2m->out = -liftpower;
+			liftright3t->out = -liftpower;
+		}
+
 }
+
