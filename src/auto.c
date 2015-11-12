@@ -55,7 +55,7 @@ void autonomous() {
 	shoot();
 	shoot();
 	delay(60000);
-	lift();
+	lift();//raises lift, runs conveyer belt, shoots and lowers conveyer belt, hopefully
 
 	//insert delays and calls to lift for entire period
 }
