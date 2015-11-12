@@ -49,19 +49,21 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 //void shoot();
-
 void autonomous() {
+	shoot();
 	shoot();
 	shoot();
 	shoot();
 	delay(60000);
 	lift();
 
-
 	//insert delays and calls to lift for entire period
 }
 
 void shoot() {
+	conveyer->out = 127;
+	delay(200);
+	conveyer->out = 0;
 	int shootPower = 127;
 
 	shooter1->out = shootPower;
@@ -79,23 +81,19 @@ void lift() {
 	int liftpower = 100;
 	int count = 0;
 	while (top->state != 0) {
-		liftleft1b->out = liftpower;
-		liftleft2m->out = liftpower;
-		liftleft3t->out = liftpower;
-		liftright1b->out = liftpower;
-		liftright2m->out = liftpower;
-		liftright3t->out = liftpower;
+		liftbottom->out = liftpower;
+		liftleftm->out = liftpower;
+		lifttop->out = liftpower;
+		liftrightm->out = liftpower;
 		count++;
 	}
 	shoot();
 	for (int x = 0; x < count; x++) {
-			liftleft1b->out = -liftpower;
-			liftleft2m->out = -liftpower;
-			liftleft3t->out = -liftpower;
-			liftright1b->out = -liftpower;
-			liftright2m->out = -liftpower;
-			liftright3t->out = -liftpower;
-		}
+		liftbottom->out = -liftpower;
+		liftleftm->out = -liftpower;
+		lifttop->out = -liftpower;
+		liftrightm->out = -liftpower;
+	}
 
 }
 

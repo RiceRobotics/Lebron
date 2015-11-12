@@ -54,19 +54,31 @@
 void operatorControl() {
 
 	while (1) {
-		int shoot = joystickGetDigital(1, 8, JOY_RIGHT);
+		int shoot = joystickGetDigital(1, 5, JOY_UP);
+		int revshoot = joystickGetDigital(1, 5, JOY_DOWN);
+		int conv = joystickGetDigital(1, 6, JOY_UP);
+		int revconv = joystickGetDigital(1, 6, JOY_DOWN);
 		int liftpower = joystickGetAnalog(1, 2);
-		liftleft1b->out = liftpower;
-		liftleft2m->out = liftpower;
-		liftleft3t->out = liftpower;
-		liftright1b->out = liftpower;
-		liftright2m->out = liftpower;
-		liftright3t->out = liftpower;
+		liftbottom->out = liftpower;
+		liftleftm->out = liftpower;
+		lifttop->out = liftpower;
+		liftrightm->out = liftpower;
 		int shootPower = 127;
+		if (conv) {
+			conveyer->out = 127;
+		} else if (revconv) {
+			conveyer->out = -127;
+		} else {
+			conveyer->out = 0;
+		}
 		if (shoot) {
 			shooter1->out = shootPower;
 			shooter2->out = shootPower;
 			shooter3->out = shootPower;
+		} else if (revshoot) {
+			shooter1->out = -shootPower;
+			shooter2->out = -shootPower;
+			shooter3->out = -shootPower;
 		} else {
 			shooter1->out = 0;
 			shooter2->out = 0;
