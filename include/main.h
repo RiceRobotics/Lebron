@@ -123,6 +123,8 @@ void initialize();
  */
 void operatorControl();
 
+void shooterTask(void *ignore);
+
 void shoot();
 
 void lift();

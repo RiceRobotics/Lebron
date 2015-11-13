@@ -71,7 +71,5 @@ void initialize() {
 	liftrightm = initRicemotor(4,-1);//middle motor on right
 	conveyer = initRicemotor(9,1);
 
-
-
 	taskCreate(IOTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_HIGHEST);
 }

@@ -48,16 +48,42 @@
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
-//void shoot();
 void autonomous() {
-	shoot();
-	shoot();
-	shoot();
-	shoot();
+	taskCreate(shooterTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 	delay(60000);
 	lift();//raises lift, runs conveyer belt, shoots and lowers conveyer belt, hopefully
 
 	//insert delays and calls to lift for entire period
+}
+
+void shooterTask(void *ignore) {
+	//shooter takes ~3.5 seconds per launch
+	shooter1->out = 127;
+	shooter2->out = 127;
+	shooter3->out = 127;
+	//shoot ball 1
+	conveyer->out = 127;
+	delay(2000);
+	conveyer->out = 0;
+	delay(1500);
+	//shoot ball 2
+	conveyer->out = 127;
+	delay(2000);
+	conveyer->out = 0;
+	delay(1500);
+	//shoot ball 3
+	conveyer->out = 127;
+	delay(2000);
+	conveyer->out = 0;
+	delay(1500);
+	//shoot ball 4
+	conveyer->out = 127;
+	delay(2000);
+	conveyer->out = 0;
+	delay(1500);
+
+	taskSuspend(shooterTask);
 }
 
 void shoot() {

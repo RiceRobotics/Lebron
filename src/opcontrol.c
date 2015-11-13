@@ -86,7 +86,6 @@ void operatorControl() {
 			shooter3->out = 0;
 		}
 
-		printf("%d\n\r", top->state);
 		if(!top->state && liftpower > 0) {
 			liftbottom->out = 0;
 			liftleftm->out = 0;
