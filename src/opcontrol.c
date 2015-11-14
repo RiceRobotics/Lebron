@@ -53,6 +53,10 @@
  */
 void operatorControl() {
 
+	if(taskGetState(shooterTask) == TASK_RUNNING)
+		taskSuspend(shooterTask);
+	if(taskGetState(shooterTask) == TASK_SUSPENDED)
+		taskDelete(shooterTask);
 	while (1) {
 		int shoot = joystickGetDigital(1, 6, JOY_UP);
 		int revshoot = joystickGetDigital(1, 6, JOY_DOWN);
@@ -63,12 +67,12 @@ void operatorControl() {
 		liftleftm->out = liftpower;
 		lifttop->out = liftpower;
 		liftrightm->out = liftpower;
-		int shootPower = -127;
+		int shootPower = 127;
 
 		if (conv) {
-			conveyer->out = 70;
+			conveyer->out = 127;
 		} else if (revconv) {
-			conveyer->out = -70;
+			conveyer->out = -127;
 		} else {
 			conveyer->out = 0;
 		}
@@ -92,6 +96,9 @@ void operatorControl() {
 			lifttop->out = 0;
 			liftrightm->out = 0;
 		}
+
+		if(joystickGetDigital(1, 8, JOY_UP)) autonomous();
+		printf("Sensor: %d\n\r", analogReadCalibrated(ballSensor));
 		delay(20);
 	}
 }

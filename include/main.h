@@ -64,6 +64,9 @@ Ricemotor* liftleftm;
 Ricemotor* lifttop;
 Ricemotor* liftrightm;
 Ricemotor* conveyer;
+
+int ballSensor;
+int ballThreshold;
 /**
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the
@@ -128,6 +131,11 @@ void shooterTask(void *ignore);
 void shoot();
 
 void lift();
+void liftTask(void *ignore);
+
+void conveyorTask(void *ignore);
+void advanceConveyor();
+
 
 // End C++ export structure
 #ifdef __cplusplus

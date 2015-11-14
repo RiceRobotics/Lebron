@@ -59,17 +59,21 @@ void initializeIO() {
  * can be implemented in this task if desired.
  */
 void initialize() {
+	ballSensor = 8;
+	ballThreshold = -150;
 	riceBotInitialize();
 
 	top = initRicebutton(1);//insert proper port number here
-	shooter1 = initRicemotor(2,1);//insert port number and then -1 if reversed, 1 if not
-	shooter2 = initRicemotor(3,1);
-	shooter3 = initRicemotor(6,1);
+	shooter1 = initRicemotor(2,-1);//insert port number and then -1 if reversed, 1 if not
+	shooter2 = initRicemotor(3,-1);
+	shooter3 = initRicemotor(6,-1);
 	liftbottom = initRicemotor(5,1);//both sides
 	liftleftm = initRicemotor(7,1);//middle motor on the left when looking from the front
 	lifttop = initRicemotor(8,1);//both sides
 	liftrightm = initRicemotor(4,-1);//middle motor on right
 	conveyer = initRicemotor(9,1);
+
+	analogCalibrate(ballSensor);
 
 	taskCreate(IOTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_HIGHEST);
 }
