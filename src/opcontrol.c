@@ -53,52 +53,54 @@
  */
 void operatorControl() {
 
-	if(taskGetState(shooterTask) == TASK_RUNNING)
-		taskSuspend(shooterTask);
-	if(taskGetState(shooterTask) == TASK_SUSPENDED)
-		taskDelete(shooterTask);
+//	if(taskGetState(shooterTask) == TASK_RUNNING)
+//		taskSuspend(shooterTask);
+//	if(taskGetState(shooterTask) == TASK_SUSPENDED)
+//		taskDelete(shooterTask);
 	while (1) {
-		int shoot = joystickGetDigital(1, 6, JOY_UP);
-		int revshoot = joystickGetDigital(1, 6, JOY_DOWN);
-		int conv = joystickGetDigital(1, 5, JOY_UP);
-		int revconv = joystickGetDigital(1, 5, JOY_DOWN);
-		int liftpower = joystickGetAnalog(1, 2);
-		liftbottom->out = liftpower;
-		liftleftm->out = liftpower;
-		lifttop->out = liftpower;
-		liftrightm->out = liftpower;
+		int shootL = joystickGetDigital(1, 5, JOY_UP);
+		int revShootL = joystickGetDigital(1, 5, JOY_DOWN);
+		int shootR = joystickGetDigital(1, 6, JOY_UP);
+		int revShootR = joystickGetDigital(1, 6, JOY_DOWN);
+//		int liftpower = joystickGetAnalog(1, 2);
+
+//		liftbottom->out = liftpower;
+//		liftleftm->out = liftpower;
+//		lifttop->out = liftpower;
+//		liftrightm->out = liftpower;
 		int shootPower = 127;
 
-		if (conv) {
-			conveyer->out = 127;
-		} else if (revconv) {
-			conveyer->out = -127;
+		if (shootL) {
+			shooterLL->out = shootPower;
+			shooterLR->out = shootPower;
+		} else if (revShootL) {
+			shooterLL->out = -shootPower;
+			shooterLR->out = -shootPower;
 		} else {
-			conveyer->out = 0;
-		}
-		if (shoot) {
-			shooter1->out = shootPower;
-			shooter2->out = shootPower;
-			shooter3->out = shootPower;
-		} else if (revshoot) {
-			shooter1->out = -shootPower;
-			shooter2->out = -shootPower;
-			shooter3->out = -shootPower;
-		} else {
-			shooter1->out = 0;
-			shooter2->out = 0;
-			shooter3->out = 0;
+			shooterLL->out = 0;
+			shooterLR->out = 0;
 		}
 
-		if(!top->state && liftpower > 0) {
-			liftbottom->out = 0;
-			liftleftm->out = 0;
-			lifttop->out = 0;
-			liftrightm->out = 0;
+		if (shootR) {
+			shooterRL->out = shootPower;
+			shooterRR->out = shootPower;
+		} else if (revShootR) {
+			shooterRL->out = -shootPower;
+			shooterRR->out = -shootPower;
+		} else {
+			shooterRL->out = 0;
+			shooterRR->out = 0;
 		}
 
-		if(joystickGetDigital(1, 8, JOY_UP)) autonomous();
-		printf("Sensor: %d\n\r", analogReadCalibrated(ballSensor));
-		delay(20);
+//		if(!top->state && liftpower > 0) {
+//			liftbottom->out = 0;
+//			liftleftm->out = 0;
+//			lifttop->out = 0;
+//			liftrightm->out = 0;
+//		}
+
+		//		if(joystickGetDigital(1, 8, JOY_UP)) autonomous();
+		//		printf("Sensor: %d\n\r", analogReadCalibrated(ballSensor));
+		//		delay(20);
 	}
 }

@@ -60,16 +60,16 @@ void autonomous() {
 	shoot();
 
 	conveyer->out = 0;
-	shooter1->out = 0;
-	shooter2->out = 0;
-	shooter3->out = 0;
+//	shooter1->out = 0;
+//	shooter2->out = 0;
+//	shooter3->out = 0;
 }
 
 void shooterTask(void *ignore) {
 	//shooter takes ~3.5 seconds per launch
-	shooter1->out = 127;
-	shooter2->out = 127;
-	shooter3->out = 127;
+//	shooter1->out = 127;
+//	shooter2->out = 127;
+//	shooter3->out = 127;
 	//shoot ball 1
 	conveyer->out = 127;
 	delay(2000);
@@ -111,27 +111,27 @@ void shoot() {
 
 	delay(500);
 
-	shooter1->out = 127;
-	shooter2->out = 127;
-	shooter3->out = 127;
+//	shooter1->out = 127;
+//	shooter2->out = 127;
+//	shooter3->out = 127;
 
 	delay(1000);
 
-	shooter1->out = 0;
-	shooter2->out = 0;
-	shooter3->out = 0;
+//	shooter1->out = 0;
+//	shooter2->out = 0;
+//	shooter3->out = 0;
 
 	delay(1000);
 
-	shooter1->out = 127;
-	shooter2->out = 127;
-	shooter3->out = 127;
+//	shooter1->out = 127;
+//	shooter2->out = 127;
+//	shooter3->out = 127;
 
 	delay(1000);
 
-	shooter1->out = 0;
-	shooter2->out = 0;
-	shooter3->out = 0;
+//	shooter1->out = 0;
+//	shooter2->out = 0;
+//	shooter3->out = 0;
 }
 
 void liftTask(void *ignore) {

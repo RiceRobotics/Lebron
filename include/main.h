@@ -56,9 +56,10 @@ extern "C" {
 
 // Prototypes for initialization, operator control and autonomous
 Ricebutton *top;
-Ricemotor* shooter1;
-Ricemotor* shooter2;
-Ricemotor* shooter3;
+Ricemotor* shooterLL;
+Ricemotor* shooterLR;
+Ricemotor* shooterRL;
+Ricemotor* shooterRR;
 Ricemotor* liftbottom;
 Ricemotor* liftleftm;
 Ricemotor* lifttop;
