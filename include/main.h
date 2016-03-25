@@ -55,19 +55,22 @@ extern "C" {
 // actual code. If a function does not match a prototype, compile errors will occur.
 
 // Prototypes for initialization, operator control and autonomous
-Ricebutton *top;
-Ricemotor* shooterLL;
-Ricemotor* shooterLR;
-Ricemotor* shooterRL;
-Ricemotor* shooterRR;
-Ricemotor* liftbottom;
-Ricemotor* liftleftm;
-Ricemotor* lifttop;
-Ricemotor* liftrightm;
-Ricemotor* conveyer;
+Ricemotor* shooterL1;
+Ricemotor* shooterR1;
+Ricemotor* shooterL2;
+Ricemotor* shooterR2;
+Ricemotor* ramp;
+Ricemotor* net;
 
-int ballSensor;
-int ballThreshold;
+RicesensorAnalog* ANALaunch;
+RicesensorAnalog* ANAQueue;
+
+int autoFire;
+int launchThreshold;
+int queueThreshold;
+
+void shooterTask(void* ignore);
+
 /**
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the

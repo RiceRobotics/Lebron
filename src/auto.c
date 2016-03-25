@@ -49,139 +49,25 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 void autonomous() {
-	//	shoot();
-	advanceConveyor();
-	shoot();
-	advanceConveyor();
-	shoot();
-	advanceConveyor();
-	shoot();
-	advanceConveyor();
-	shoot();
-
-	conveyer->out = 0;
-//	shooter1->out = 0;
-//	shooter2->out = 0;
-//	shooter3->out = 0;
+	autoFire = 1;
 }
 
-void shooterTask(void *ignore) {
-	//shooter takes ~3.5 seconds per launch
-//	shooter1->out = 127;
-//	shooter2->out = 127;
-//	shooter3->out = 127;
-	//shoot ball 1
-	conveyer->out = 127;
-	delay(2000);
-	conveyer->out = 0;
-	delay(1500);
-	//shoot ball 2
-	conveyer->out = 127;
-	delay(2000);
-	conveyer->out = 0;
-	delay(1500);
-	//shoot ball 3
-	conveyer->out = 127;
-	delay(2000);
-	conveyer->out = 0;
-	delay(1500);
-	//shoot ball 4
-	conveyer->out = 127;
-	delay(2000);
-	conveyer->out = 0;
-	delay(1500);
-
-	taskSuspend(shooterTask);
-}
-
-/**
- * Assumes there is a ball in sensor position
- */
-void shoot() {
-	delay(500);
-
-	conveyer->out = 100;
-	long startTime = millis();
-	while(analogReadCalibrated(ballSensor) > ballThreshold || millis()-startTime < 500) {
-		if(millis() > startTime + 1000) break;
-		printf("Sensor: %d | time: %ld\n\r", analogReadCalibrated(ballSensor), millis()-startTime);
+void shooterTask(void* ignore) {
+	while(1) {
+		if(autoFire) {
+			if(ANALaunch->value < launchThreshold || ANAQueue->value <  queueThreshold) {
+				shooterL1->out = 127;
+				shooterR1->out = 127;
+				shooterL2->out = 127;
+				shooterR2->out = 127;
+			}
+			else {
+				shooterL1->out = 0;
+				shooterR1->out = 0;
+				shooterL2->out = 0;
+				shooterR2->out = 0;
+			}
+		}
 		delay(20);
 	}
-	conveyer->out = 0;
-
-	delay(500);
-
-//	shooter1->out = 127;
-//	shooter2->out = 127;
-//	shooter3->out = 127;
-
-	delay(1000);
-
-//	shooter1->out = 0;
-//	shooter2->out = 0;
-//	shooter3->out = 0;
-
-	delay(1000);
-
-//	shooter1->out = 127;
-//	shooter2->out = 127;
-//	shooter3->out = 127;
-
-	delay(1000);
-
-//	shooter1->out = 0;
-//	shooter2->out = 0;
-//	shooter3->out = 0;
 }
-
-void liftTask(void *ignore) {
-	//	int liftpower = 127;
-	int count = 0;
-
-	liftbottom->out = 127;
-	liftleftm->out = 127;
-	lifttop->out = 127;
-	liftrightm->out = 127;
-	while (top->state) {
-		count++;
-		delay(20);
-	}
-	liftbottom->out = 0;
-	liftleftm->out = 0;
-	lifttop->out = 0;
-	liftrightm->out = 0;
-	delay(1000);
-
-	liftbottom->out = -127;
-	liftleftm->out = -127;
-	lifttop->out = -127;
-	liftrightm->out = -127;
-	for(int i = 0; i < count; i++) {
-		delay(20);
-	}
-	liftbottom->out = 0;
-	liftleftm->out = 0;
-	lifttop->out = 0;
-	liftrightm->out = 0;
-	taskSuspend(liftTask);
-}
-
-void conveyorTask(void *ignore) {
-	conveyer->out = 127;
-	while(analogReadCalibrated(ballSensor) < ballThreshold) {
-		delay(20);
-	}
-	conveyer->out = 0;
-	taskSuspend(conveyorTask);
-}
-
-void advanceConveyor() {
-	conveyer->out = 127;
-	long startTime = millis();
-	while(analogReadCalibrated(ballSensor) > ballThreshold) {
-		if(millis() > startTime + 3000) break;
-		delay(20);
-	}
-	conveyer->out = 0;
-}
-

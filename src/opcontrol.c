@@ -53,54 +53,46 @@
  */
 void operatorControl() {
 
-//	if(taskGetState(shooterTask) == TASK_RUNNING)
-//		taskSuspend(shooterTask);
-//	if(taskGetState(shooterTask) == TASK_SUSPENDED)
-//		taskDelete(shooterTask);
+	autoFire = 0;
 	while (1) {
-		int shootL = joystickGetDigital(1, 5, JOY_UP);
-		int revShootL = joystickGetDigital(1, 5, JOY_DOWN);
-		int shootR = joystickGetDigital(1, 6, JOY_UP);
-		int revShootR = joystickGetDigital(1, 6, JOY_DOWN);
-//		int liftpower = joystickGetAnalog(1, 2);
+		int shoot = joystickGetDigital(1, 6, JOY_UP);
+		int revShoot = joystickGetDigital(1, 6, JOY_DOWN);
 
-//		liftbottom->out = liftpower;
-//		liftleftm->out = liftpower;
-//		lifttop->out = liftpower;
-//		liftrightm->out = liftpower;
-		int shootPower = 127;
-
-		if (shootL) {
-			shooterLL->out = shootPower;
-			shooterLR->out = shootPower;
-		} else if (revShootL) {
-			shooterLL->out = -shootPower;
-			shooterLR->out = -shootPower;
-		} else {
-			shooterLL->out = 0;
-			shooterLR->out = 0;
+		if(!autoFire) {
+			if(shoot) {
+				shooterL1->out = 127;
+				shooterR1->out = 127;
+				shooterL2->out = 127;
+				shooterR2->out = 127;
+			}
+			else if(revShoot) {
+				shooterL1->out = -127;
+				shooterR1->out = -127;
+				shooterL2->out = -127;
+				shooterR2->out = -127;
+			}
+			else {
+				shooterL1->out = 0;
+				shooterR1->out = 0;
+				shooterL2->out = 0;
+				shooterR2->out = 0;
+			}
 		}
 
-		if (shootR) {
-			shooterRL->out = shootPower;
-			shooterRR->out = shootPower;
-		} else if (revShootR) {
-			shooterRL->out = -shootPower;
-			shooterRR->out = -shootPower;
-		} else {
-			shooterRL->out = 0;
-			shooterRR->out = 0;
+		if(joystickGetDigital(1, 5, JOY_UP)) {
+			ramp->out = 127;
+		}
+		else {
+			ramp->out = 0;
 		}
 
-//		if(!top->state && liftpower > 0) {
-//			liftbottom->out = 0;
-//			liftleftm->out = 0;
-//			lifttop->out = 0;
-//			liftrightm->out = 0;
-//		}
+		if(joystickGetDigital(1, 7, JOY_UP)) net->out = 127;
+		else if(joystickGetDigital(1, 7, JOY_DOWN)) net->out = -127;
+		else net->out = 0;
 
-		//		if(joystickGetDigital(1, 8, JOY_UP)) autonomous();
-		//		printf("Sensor: %d\n\r", analogReadCalibrated(ballSensor));
-		//		delay(20);
+		if(joystickGetDigital(1, 8, JOY_UP)) autoFire = 1;
+		else if(joystickGetDigital(1, 8, JOY_DOWN)) autoFire = 0;
+
+		printf("TaskState: %d, ANALaunch: %4d, ANAQueue: %4d\n\r", autoFire, ANALaunch->value, ANAQueue->value);
 	}
 }
